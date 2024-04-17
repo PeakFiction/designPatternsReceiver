@@ -66,7 +66,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [V] Commit: `Create Notification database and Notification repository struct skeleton.`
     -   [V] Commit: `Implement add function in Notification repository.`
     -   [V] Commit: `Implement list_all_as_string function in Notification repository.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
+    -   [V] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -89,7 +89,11 @@ This is the place for you to write reflections:
 
 The code relies on RwLock<Vec<Notification>> to keep things in order when multiple threads access the notification list. This fancy lock lets multiple threads read the list at once (great for efficiency) but only allows one thread to write (important to avoid data corruption). This is crucial because different threads might add or grab notifications from the same list.  A regular Mutex<Vec<Notification>> would be too strict, only allowing one thread in at a time, even for reads.  With RwLock, reads can happen concurrently while writes remain exclusive, making it the perfect fit for this situation.
 
+The code relies on RwLock<Vec<Notification>> to keep things in order when multiple threads access the notification list. This fancy lock lets multiple threads read the list at once (great for efficiency) but only allows one thread to write (important to avoid data corruption). This is crucial because different threads might add or grab notifications from the same list.  A regular Mutex<Vec<Notification>> would be too strict, only allowing one thread in at a time, even for reads.  With RwLock, reads can happen concurrently while writes remain exclusive, making it the perfect fit for this situation.
+
+
 *In this tutorial, we used lazy_static external library to define Vec and DashMap as a “static” variable. Compared to Java where we can mutate the content of a static variable via a static function, why did not Rust allow us to do so?*
 
+Rust enforces memory safety and thread safety through its ownership and immutability rules. Unlike languages with garbage collection, Rust manages memory explicitly, preventing data races. Static variables, by default, are immutable. This means their value can't be changed after initialization. This design choice aligns with Rust's focus on safety. It prevents potential issues caused by concurrent access to static variables, which could corrupt data or lead to unpredictable behavior. By disallowing mutation, Rust forces developers to use safe and explicit mechanisms like locks (Mutexes, RwLocks) or atomic operations to control access to shared data. This approach promotes robust and predictable concurrent programming in Rust, without sacrificing performance or adding unnecessary complexity.
 
 #### Reflection Subscriber-2
