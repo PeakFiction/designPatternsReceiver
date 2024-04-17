@@ -68,16 +68,16 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [V] Commit: `Implement list_all_as_string function in Notification repository.`
     -   [V] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
-    -   [ ] Commit: `Create Notification service struct skeleton.`
-    -   [ ] Commit: `Implement subscribe function in Notification service.`
-    -   [ ] Commit: `Implement subscribe function in Notification controller.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification service.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Commit: `Implement receive_notification function in Notification service.`
-    -   [ ] Commit: `Implement receive function in Notification controller.`
-    -   [ ] Commit: `Implement list_messages function in Notification service.`
-    -   [ ] Commit: `Implement list function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
+    -   [V] Commit: `Create Notification service struct skeleton.`
+    -   [V] Commit: `Implement subscribe function in Notification service.`
+    -   [V] Commit: `Implement subscribe function in Notification controller.`
+    -   [V] Commit: `Implement unsubscribe function in Notification service.`
+    -   [V] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [V] Commit: `Implement receive_notification function in Notification service.`
+    -   [V] Commit: `Implement receive function in Notification controller.`
+    -   [V] Commit: `Implement list_messages function in Notification service.`
+    -   [V] Commit: `Implement list function in Notification controller.`
+    -   [V] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -97,3 +97,15 @@ The code relies on RwLock<Vec<Notification>> to keep things in order when multip
 Rust enforces memory safety and thread safety through its ownership and immutability rules. Unlike languages with garbage collection, Rust manages memory explicitly, preventing data races. Static variables, by default, are immutable. This means their value can't be changed after initialization. This design choice aligns with Rust's focus on safety. It prevents potential issues caused by concurrent access to static variables, which could corrupt data or lead to unpredictable behavior. By disallowing mutation, Rust forces developers to use safe and explicit mechanisms like locks (Mutexes, RwLocks) or atomic operations to control access to shared data. This approach promotes robust and predictable concurrent programming in Rust, without sacrificing performance or adding unnecessary complexity.
 
 #### Reflection Subscriber-2
+
+*Have you explored things outside of the steps in the tutorial, for example: src/lib.rs? If not, explain why you did not do so. If yes, explain things that you have learned from those other parts of code.*
+
+I haven't due to the limited time I have with other projects.
+
+*Since you have completed the tutorial by now and have tried to test your notification system by spawning multiple instances of Receiver, explain how Observer pattern eases you to plug in more subscribers. How about spawning more than one instance of Main app, will it still be easy enough to add to the system?*
+
+The Observer pattern shines in its ability to effortlessly handle growing numbers of subscribers. Subscribers simply register with the publisher to get updates, keeping them loosely coupled. Adding new subscribers doesn't require touching the publisher's code. Instead, new subscriber instances can be created and registered on the fly, smoothly fitting into the existing system. Similarly, scaling the main application by spawning multiple instances is a breeze. Each instance manages its own subscriber set and notifications independently. New subscribers can be added to any instance without disrupting others. This scalability makes the system highly adaptable and easy to maintain as it expands.
+
+*Have you tried to make your own Tests, or enhance documentation on your Postman collection? If you have tried those features, tell us whether it is useful for your work (it can be your tutorial work or your Group Project).*
+
+While writing my own tests was a good first step, it can be challenging to achieve thorough coverage, especially for edge cases.  These are the unexpected or extreme scenarios that can expose hidden bugs.
