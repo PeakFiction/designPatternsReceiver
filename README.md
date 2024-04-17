@@ -61,13 +61,13 @@ You can install Postman via this website: https://www.postman.com/downloads/
 ## Mandatory Checklists (Subscriber)
 -   [ ] Clone https://gitlab.com/ichlaffterlalu/bambangshop-receiver to a new repository.
 -   **STAGE 1: Implement models and repositories**
-    -   [ ] Commit: `Create Notification model struct.`
-    -   [ ] Commit: `Create SubscriberRequest model struct.`
-    -   [ ] Commit: `Create Notification database and Notification repository struct skeleton.`
-    -   [ ] Commit: `Implement add function in Notification repository.`
-    -   [ ] Commit: `Implement list_all_as_string function in Notification repository.`
+    -   [V] Commit: `Create Notification model struct.`
+    -   [V] Commit: `Create SubscriberRequest model struct.`
+    -   [V] Commit: `Create Notification database and Notification repository struct skeleton.`
+    -   [V] Commit: `Implement add function in Notification repository.`
+    -   [V] Commit: `Implement list_all_as_string function in Notification repository.`
     -   [ ] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
--   **STAGE 3: Implement services and controllers**
+-   **STAGE 2: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
     -   [ ] Commit: `Implement subscribe function in Notification controller.`
@@ -85,5 +85,11 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+*In this tutorial, we used RwLock<> to synchronise the use of Vec of Notifications. Explain why it is necessary for this case, and explain why we do not use Mutex<> instead?*
+
+The code relies on RwLock<Vec<Notification>> to keep things in order when multiple threads access the notification list. This fancy lock lets multiple threads read the list at once (great for efficiency) but only allows one thread to write (important to avoid data corruption). This is crucial because different threads might add or grab notifications from the same list.  A regular Mutex<Vec<Notification>> would be too strict, only allowing one thread in at a time, even for reads.  With RwLock, reads can happen concurrently while writes remain exclusive, making it the perfect fit for this situation.
+
+*In this tutorial, we used lazy_static external library to define Vec and DashMap as a “static” variable. Compared to Java where we can mutate the content of a static variable via a static function, why did not Rust allow us to do so?*
+
 
 #### Reflection Subscriber-2
